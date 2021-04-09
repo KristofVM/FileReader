@@ -82,5 +82,16 @@ namespace FileReadingLibrary
         public static T ReadJson<T>(string filePath)
             => JsonConvert.DeserializeObject<T>(ReadTxt(filePath));
         #endregion 
+
+        #region Version 8
+        /// <summary>
+        /// Method wil read, dectypt and return the content of a JSON file as T.
+        /// </summary>
+        /// <typeparam name="T">The type that is to be returned.</typeparam>
+        /// <param name="filePath">The full path where the file is located.</param>
+        /// <returns>The content of a JSON file as T.</returns>
+        public static T ReadJson<T>(string filePath, Func<string, string> decryptionAlg)
+            => JsonConvert.DeserializeObject<T>(ReadTxt(filePath, decryptionAlg));
+        #endregion 
     }
 }
