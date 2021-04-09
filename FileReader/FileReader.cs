@@ -40,5 +40,16 @@ namespace FileReadingLibrary
             return serialzeResult;
         }
         #endregion
+
+        #region Version 3
+        /// <summary>
+        /// Returns and Decripts the content of the file by a given decryption algorithm.
+        /// </summary>
+        /// <param name="filePath">The full path where the file is located.</param>
+        /// <param name="decryptionAlg">The decryption algorithm that is to be used to decrypt the file.</param>
+        /// <returns>A decrypted string of the file content.</returns>
+        public static string ReadTxt(string filePath, Func<string, string> decryptionAlg)
+            => decryptionAlg.Invoke(ReadTxt(filePath));
+        #endregion
     }
 }
