@@ -70,5 +70,17 @@ namespace FileReadingLibrary
             return (T)new XmlSerializer(typeof(T)).Deserialize(stream);
         }
         #endregion
+
+        #region Version 7
+        /// <summary>
+        /// Method wil read and return the content of a JSON file as T.
+        /// </summary>
+        /// <typeparam name="T">The type that is to be returned.</typeparam>
+        /// <param name="filePath">The full path where the file is located.</param>
+        /// /// <param name="decryptionAlg">The decryption algorithm that is to be used.</param>
+        /// <returns>The content of a JSON file as T.</returns>
+        public static T ReadJson<T>(string filePath)
+            => JsonConvert.DeserializeObject<T>(ReadTxt(filePath));
+        #endregion 
     }
 }
