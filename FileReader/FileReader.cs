@@ -51,5 +51,24 @@ namespace FileReadingLibrary
         public static string ReadTxt(string filePath, Func<string, string> decryptionAlg)
             => decryptionAlg.Invoke(ReadTxt(filePath));
         #endregion
+
+        #region Version 5
+        /// <summary>
+        /// Returns and decrypts the content of an xml file as T
+        /// </summary>
+        /// <typeparam name="T">The type that is to be returned</typeparam>
+        /// <param name="filePath">The location of the file</param>
+        /// <param name="decryptionAlg">The decryption algorithm that is to be used.</param>
+        /// <returns>the content of the XML file as Type T</returns>
+        public static T ReadXML<T>(string filePath, Func<string, string> decryptionAlg)
+        {
+            var xmlDecrypted = ReadTxt(filePath, decryptionAlg);
+
+            byte[] byteArray = Encoding.ASCII.GetBytes(xmlDecrypted);
+            MemoryStream stream = new MemoryStream(byteArray);
+
+            return (T)new XmlSerializer(typeof(T)).Deserialize(stream);
+        }
+        #endregion
     }
 }
