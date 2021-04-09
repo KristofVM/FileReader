@@ -22,5 +22,23 @@ namespace FileReadingLibrary
         }
 
         #endregion
+
+        #region Version 2
+        /// <summary>
+        /// Method wil read and return the content of an XML file as T.
+        /// </summary>
+        /// <typeparam name="T">The type that is to be returned.</typeparam>
+        /// <param name="filePath">The full path where the file is located.</param>
+        /// <returns>The content of an XML file as T.</returns>
+        public static T ReadXML<T>(string filePath)
+        {
+            using Stream reader = new FileStream($@"{filePath}", FileMode.Open);
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+
+            var serialzeResult = (T)serializer.Deserialize(reader);
+
+            return serialzeResult;
+        }
+        #endregion
     }
 }
